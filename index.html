@@ -4,92 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우리 결혼합니다</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-        body { font-family: 'Gowun Dodum', sans-serif; }
+        /* 기본 초기화 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            background-color: #f3f4f6; /* 바탕 회색 */
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+        /* 모바일 화면 규격 */
+        .wrap {
+            width: 100%;
+            max-width: 430px;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+        }
+        img { width: 100%; height: auto; display: block; }
+        
+        /* 공통 섹션 스타일 */
+        section { padding: 5rem 1.5rem; text-align: center; }
+        .title-eng { font-family: 'Noto Serif KR', serif; font-size: 2rem; color: #1c1c1c; font-weight: 700; margin-bottom: 0.5rem; }
+        
+        /* 스크롤 애니메이션 (Fade-in) 준비 클래스 */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+
+        /* 1. 메인 섹션 (핑크) */
+        .sec-main { background-color: #fad4da; padding-top: 0; padding-bottom: 4rem; }
+        .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
+        .sec-main .date { font-size: 0.95rem; margin-top: 1rem; line-height: 1.6; }
+
+        /* 2. 초대글 섹션 (블랙) */
+        .sec-invite { background-color: #1c1c1c; color: white; }
+        .sec-invite h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
+        .sec-invite p { line-height: 2.4; font-size: 0.95rem; color: #e5e7eb; }
+        
+        /* 3. 디데이 & 캘린더 (핑크) */
+        .sec-dday { background-color: #fad4da; }
+        .dday-box { background-color: white; padding: 1.5rem; border-radius: 12px; display: inline-block; margin-top: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .dday-box strong { font-size: 1.2rem; color: #e11d48; }
+
+        /* 4. 갤러리 섹션 (베이지) */
+        .sec-gallery { background-color: #f0eadd; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
+        .grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 2px; }
+
+        /* 5. 오시는 길 (블랙) */
+        .sec-map { background-color: #1c1c1c; color: white; }
+        .sec-map h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
+        .map-info { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; color: #d1d5db; }
+        .map-info strong { color: white; font-size: 1.1rem; }
+
+        /* 6. 마음 전하실 곳 (아코디언 UI) */
+        .sec-account { background-color: #1c1c1c; border-top: 1px dashed #444; padding-bottom: 4rem; }
+        .sec-account h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
+        
+        /* 자바스크립트 없는 아코디언 메뉴 */
+        details { background-color: #2a2a2a; border-radius: 8px; margin-bottom: 1rem; text-align: left; overflow: hidden; }
+        summary { padding: 1rem; color: white; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(45deg); }
+        .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.9rem; border-top: 1px solid #ddd; }
+        .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .copy-btn { background-color: #e5e7eb; border: none; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+
+        /* 하단 고정 버튼 영역 */
+        .bottom-bar { background-color: #fcfafa; padding: 1.5rem 1rem; display: flex; gap: 0.5rem; }
+        .btn { flex: 1; padding: 1rem; border-radius: 999px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; }
+        .btn-link { background-color: #e5e7eb; color: #333; }
+        .btn-kakao { background-color: #fae100; color: #3c1e1e; }
     </style>
 </head>
-<body class="bg-gray-200 flex justify-center">
-
-    <div class="w-full max-w-[430px] bg-white shadow-2xl overflow-hidden">
+<body>
+    <div class="wrap">
         
-        <section class="bg-[#fad4da] text-center pb-12">
-            <img src="https://via.placeholder.com/430x550?text=Main+Photo(Black+%26+White)" alt="메인 흑백 사진" class="w-full object-cover">
-            
-            <div class="mt-10 relative">
-                <h1 class="text-4xl font-bold text-[#1a1a1a]">Invitation</h1>
-                <p class="mt-4 text-lg font-bold text-gray-800">빵소 & 빠미</p>
-                <p class="mt-2 text-sm text-gray-700">2026년 10월 9일 금요일 오후 5시</p>
-                <p class="text-sm text-gray-700">가천컨벤션 미디어 아트홀</p>
+        <section class="sec-main">
+            <img src="https://via.placeholder.com/430x550/1c1c1c/ffffff?text=Main+Photo" alt="메인 사진">
+            <div class="fade-up" style="margin-top: 3rem;">
+                <h1 class="title-eng">Wedding Invitation</h1>
+                <p class="names">정범영 &amp; 방소현</p>
+                <p class="date">2026년 10월 24일 토요일 오후 1시<br>가천컨벤션센터</p>
             </div>
         </section>
 
-        <section class="bg-[#1c1c1c] text-white text-center py-20 px-6">
-            <h2 class="text-2xl mb-8 text-[#fad4da]">초대합니다</h2>
-            <p class="leading-loose text-sm text-gray-300">
+        <section class="sec-invite fade-up">
+            <h2>초대합니다</h2>
+            <p>
                 서로가 마주보며 다져온 사랑을<br>
                 이제 함께 한 곳을 바라보며<br>
-                걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br>
+                걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br><br>
                 저희 두 사람이 사랑의 이름으로<br>
                 지켜나갈 수 있게 앞날을<br>
                 축복해 주시면 감사하겠습니다.
             </p>
-            <div class="mt-12 flex justify-center">
-                <img src="https://via.placeholder.com/250x250?text=Sub+Photo(Pink)" alt="서브 사진" class="rounded-sm border border-[#fad4da]">
+            <img src="https://via.placeholder.com/300x400/fad4da/1c1c1c?text=Sub+Photo" loading="lazy" style="margin: 3rem auto 0; width: 80%; border-radius: 100px 100px 0 0;">
+        </section>
+
+        <section class="sec-dday fade-up">
+            <h2 class="title-eng">Save the Date</h2>
+            <p style="margin-top:0.5rem; font-size:1.1rem;">2026. 10. 24</p>
+            <div class="dday-box">
+                정범영과 방소현의 결혼식이 <br><strong id="d-day-text">D-Day</strong> 남았습니다.
             </div>
         </section>
 
-        <section class="bg-[#f0eadd] py-20 px-4 text-center">
-            <h2 class="text-2xl mb-10 text-gray-800 font-bold">Gallery</h2>
-            
-            <div class="grid grid-cols-3 gap-1">
-                <img src="https://via.placeholder.com/150x150?text=1" class="w-full h-32 object-cover">
-                <img src="https://via.placeholder.com/150x150?text=2" class="w-full h-32 object-cover">
-                <img src="https://via.placeholder.com/150x150?text=3" class="w-full h-32 object-cover">
-                <img src="https://via.placeholder.com/150x150?text=4" class="w-full h-32 object-cover">
-                <img src="https://via.placeholder.com/150x150?text=5" class="w-full h-32 object-cover">
-                <img src="https://via.placeholder.com/150x150?text=6" class="w-full h-32 object-cover">
+        <section class="sec-gallery fade-up">
+            <h2 class="title-eng">Gallery</h2>
+            <div class="grid">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=1" loading="lazy">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=2" loading="lazy">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=3" loading="lazy">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=4" loading="lazy">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=5" loading="lazy">
+                <img src="https://via.placeholder.com/300x300/e5e7eb/666?text=6" loading="lazy">
             </div>
         </section>
 
-        <section class="bg-[#1c1c1c] text-white py-16 px-6">
-            <h2 class="text-center text-xl font-bold mb-8 text-[#fad4da]">오시는 길</h2>
-            <img src="https://via.placeholder.com/400x300?text=Kakao+Map+API" class="w-full mb-6 rounded">
-            <p class="text-sm text-gray-300">
-                <span class="font-bold text-white">가천컨벤션 미디어 아트홀</span><br>
-                경기도 성남시 수정구 성남대로 1342<br>
-                지하철 수인분당선 가천대역 1번 출구 도보 3분
+        <section class="sec-map fade-up">
+            <h2>오시는 길</h2>
+            <img src="https://via.placeholder.com/400x300/333/fff?text=Map+Placeholder" loading="lazy" style="border-radius: 8px;">
+            <p class="map-info">
+                <strong>가천컨벤션센터</strong><br>
+                경기 성남시 수정구 성남대로 1342 (비전타워)<br><br>
+                [지하철] 수인분당선 가천대역 1번 출구 도보 1분 (연결통로)<br>
+                [주차] 약 1,500대 동시 주차 가능 (무료)
             </p>
         </section>
 
-        <section class="bg-[#1c1c1c] text-white py-10 px-6 border-t border-gray-700">
-            <h2 class="text-center text-xl font-bold mb-8 text-[#fad4da]">마음 전하실 곳</h2>
-            <div class="flex gap-4">
-                <div class="flex-1 bg-[#f0eadd] text-black p-4 rounded-md text-center">
-                    <div class="font-bold mb-2 text-[#1c1c1c]">신랑측</div>
-                    <div class="text-xs mt-2 text-gray-600">국민은행</div>
-                    <div class="text-sm font-bold">1234-567-890123</div>
-                    <div class="text-xs text-gray-600 mt-1">예금주: 정범영</div>
+        <section class="sec-account fade-up">
+            <h2>마음 전하실 곳</h2>
+            
+            <details>
+                <summary>신랑측 계좌번호</summary>
+                <div class="account-body">
+                    <div class="account-row">
+                        <div>
+                            <strong>국민 1234-567-890123</strong><br>
+                            <span style="color:#666; font-size:0.8rem;">예금주: 정범영</span>
+                        </div>
+                        <button class="copy-btn" onclick="alert('복사되었습니다 (구현예정)')">복사</button>
+                    </div>
                 </div>
-                <div class="flex-1 bg-[#fad4da] text-black p-4 rounded-md text-center">
-                    <div class="font-bold mb-2 text-[#1c1c1c]">신부측</div>
-                    <div class="text-xs mt-2 text-gray-600">신한은행</div>
-                    <div class="text-sm font-bold">110-123-456789</div>
-                    <div class="text-xs text-gray-600 mt-1">예금주: 방소현</div>
+            </details>
+
+            <details>
+                <summary>신부측 계좌번호</summary>
+                <div class="account-body">
+                    <div class="account-row">
+                        <div>
+                            <strong>신한 110-123-456789</strong><br>
+                            <span style="color:#666; font-size:0.8rem;">예금주: 방소현</span>
+                        </div>
+                        <button class="copy-btn" onclick="alert('복사되었습니다 (구현예정)')">복사</button>
+                    </div>
                 </div>
-            </div>
+            </details>
         </section>
 
-        <section class="bg-[#fcfafa] py-10 flex justify-center gap-3">
-            <button class="px-6 py-3 bg-gray-800 text-white rounded-full text-sm hover:bg-gray-700 transition">
-                링크 복사
-            </button>
-            <button class="px-6 py-3 bg-[#fae100] text-[#3c1e1e] rounded-full text-sm font-bold hover:bg-yellow-400 transition">
-                카카오톡 공유
-            </button>
-        </section>
+        <div class="bottom-bar">
+            <button class="btn btn-link">링크 복사</button>
+            <button class="btn btn-kakao">카카오톡 공유</button>
+        </div>
         
     </div>
+
+    <script>
+        // --- 1. 디데이 자동 계산 ---
+        const weddingDate = new Date("2026-10-24T00:00:00").getTime();
+        const today = new Date().getTime();
+        const gap = weddingDate - today;
+        const dDay = Math.ceil(gap / (1000 * 60 * 60 * 24));
+        
+        const dDayText = document.getElementById("d-day-text");
+        if (dDay > 0) dDayText.innerText = `D-${dDay}`;
+        else if (dDay === 0) dDayText.innerText = "D-Day";
+        else dDayText.innerText = `D+${Math.abs(dDay)}`;
+
+        // --- 2. 스크롤 Fade-in 애니메이션 (Intersection Observer) ---
+        // 무거운 라이브러리 없이 브라우저 기본 기능으로 스크롤 감지
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active'); // 화면에 보이면 클래스 추가
+                }
+            });
+        }, { threshold: 0.1 }); // 요소가 10% 보일 때 실행
+
+        // 'fade-up' 클래스를 가진 모든 요소 추적 시작
+        document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+    </script>
 </body>
 </html>
