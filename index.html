@@ -212,7 +212,7 @@
 
         <div class="bottom-bar">
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
-            <button class="btn btn-kakao" onclick="shareWeb()">카카오톡 공유</button>
+            <button class="btn btn-kakao" onclick="copyLink()">카카오톡 공유</button>
         </div>
 
         
@@ -240,30 +240,14 @@
             });
         }
 
-        // --- 청첩장 링크 복사 기능 ---
+        // --- 깔끔한 링크 복사 및 공유 안내 기능 ---
         function copyLink() {
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
-                alert('청첩장 주소가 복사되었습니다. 원하는 곳에 붙여넣기 해주세요!');
+                alert('청첩장 주소가 복사되었습니다! 카카오톡 채팅창에 붙여넣기(Ctrl+V 또는 꾹 누르기) 해주세요.');
             }).catch(() => {
                 alert('링크 복사에 실패했습니다. 브라우저 주소창을 직접 복사해주세요.');
             });
-        }
-
-        // --- 폰 자체 공유 기능 (카카오톡 포함 모든 앱에서 에러 없이 작동) ---
-        function shareWeb() {
-            if (navigator.share) {
-                navigator.share({
-                    title: '정범영 🤍 방소현 결혼합니다',
-                    text: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
-                    url: 'https://bumyoungsohyeon-wedding.vercel.app',
-                }).catch((error) => {
-                    console.log('공유 취소 또는 실패', error);
-                });
-            } else {
-                // 공유 기능을 지원하지 않는 PC 브라우저 등의 경우 링크 복사로 대체
-                copyLink();
-            }
         }
     </script>
 
