@@ -263,9 +263,17 @@
                         mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
                         webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
                     },
-                }
-                // 헷갈림을 방지하기 위해 '청첩장 보기' 하단 버튼(buttons 배열)을 아예 삭제했습니다.
-                // 사진이나 글씨 어느 곳을 눌러도 바로 청첩장으로 이동합니다.
+                },
+                // 어르신들이 잘못 누르지 않도록 명확하고 큼직한 버튼을 생성합니다!
+                buttons: [
+                    {
+                        title: '💌 청첩장 열어보기',
+                        link: {
+                            mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                            webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                        },
+                    },
+                ],
             });
         }
     </script>
