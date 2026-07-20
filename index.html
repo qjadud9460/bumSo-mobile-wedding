@@ -212,8 +212,9 @@
 
         <div class="bottom-bar">
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
-            <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
+            <button class="btn btn-kakao" onclick="shareWeb()">카카오톡 공유</button>
         </div>
+
         
     </div>
 
@@ -249,15 +250,22 @@
             });
         }
 
-        // --- 카카오톡 공유하기 기능 (발급받은 키 적용 완료) ---
-        Kakao.init('917e8c9667f9e281855b969f5db5a056'); 
-        
-        function shareKakao() {
-            // 피드 카드 대신 웹사이트의 메타 태그를 읽어와 평범한 네모 링크로 스크랩하여 전송합니다.
-            Kakao.Share.sendScrap({
-                requestUrl: 'https://bumyoungsohyeon-wedding.vercel.app'
-            });
+        // --- 폰 자체 공유 기능 (카카오톡 포함 모든 앱에서 에러 없이 작동) ---
+        function shareWeb() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '정범영 🤍 방소현 결혼합니다',
+                    text: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
+                    url: 'https://bumyoungsohyeon-wedding.vercel.app',
+                }).catch((error) => {
+                    console.log('공유 취소 또는 실패', error);
+                });
+            } else {
+                // 공유 기능을 지원하지 않는 PC 브라우저 등의 경우 링크 복사로 대체
+                copyLink();
+            }
         }
     </script>
+
 </body>
 </html>
