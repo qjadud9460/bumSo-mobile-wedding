@@ -253,9 +253,19 @@
         Kakao.init('917e8c9667f9e281855b969f5db5a056'); 
         
         function shareKakao() {
-            // 복잡한 피드 템플릿 대신, 주소만 깔끔하게 스크랩해서 보내는 기능
-            Kakao.Share.sendScrap({
-                requestUrl: 'https://bumyoungsohyeon-wedding.vercel.app'
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '정범영 🤍 방소현 결혼합니다',
+                    description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
+                    imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.jpg',
+                    link: {
+                        mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                        webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                    },
+                }
+                // 헷갈림을 방지하기 위해 '청첩장 보기' 하단 버튼(buttons 배열)을 아예 삭제했습니다.
+                // 사진이나 글씨 어느 곳을 눌러도 바로 청첩장으로 이동합니다.
             });
         }
     </script>
