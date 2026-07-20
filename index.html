@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>정범영과 방소현 결혼합니다🤍</title>
-    <link rel="icon" href="images/favicon_1.png" type="image/png">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
     <meta property="og:title" content="정범영 🤍 방소현 결혼합니다" />
-    <meta property="og:description" content="2026년 10월 9일 5시, 저희의 소중한 날에 초대합니다." />
-    <meta property="og:image" content="https://bumyoungsohyeon-wedding.vercel.app/images/link_main.webp" />
+    <meta property="og:description" content="2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다." />
+    <meta property="og:image" content="https://bumyoungsohyeon-wedding.vercel.app/images/link_main.jpg" />
     <meta property="og:url" content="https://bumyoungsohyeon-wedding.vercel.app" />
     <meta property="og:type" content="website" />
     
@@ -20,51 +20,81 @@
             display: flex;
             justify-content: center;
             color: #333;
+            font-size: 16px; 
         }
         
         .wrap { width: 100%; max-width: 430px; background-color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow-x: hidden; }
-        section { padding: 5rem 1.5rem; text-align: center; }
-        .title-eng { font-size: 2rem; color: #1c1c1c; font-weight: 700; margin-bottom: 0.5rem; }
         
-        /* 스크롤 애니메이션 준비 클래스 */
+        section { padding: 4rem 1.5rem; text-align: center; }
+        .title-eng { font-size: 1.8rem; color: #1c1c1c; font-weight: 700; margin-bottom: 0.5rem; }
+        
+        /* 스크롤 애니메이션 */
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 각 섹션 스타일 */
-        .sec-main { background-color: #fad4da; padding-top: 0; padding-bottom: 4rem; }
+        /* 메인 & 초대글 */
+        .sec-main { background-color: #fad4da; padding-top: 0; padding-bottom: 3rem; }
         .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
-        .sec-main .date { font-size: 0.95rem; margin-top: 1rem; line-height: 1.6; }
+        .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
         .sec-invite { background-color: #1c1c1c; color: white; }
-        .sec-invite h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
-        .sec-invite p { line-height: 2.4; font-size: 0.95rem; color: #e5e7eb; }
-
-        .sec-gallery { background-color: #f0eadd; }
+        .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
+        .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
+        
+        /* 갤러리 */
+        .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         
-        /* 안내 사항 섹션 스타일 (주차 및 식사 안내) */
-        .sec-guide { background-color: #faf9f6; text-align: left; padding: 4rem 1.5rem; }
-        .sec-guide h2 { color: #1c1c1c; font-size: 1.3rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold; }
-        .guide-card { background-color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid #eee; }
-        .guide-card h3 { font-size: 1.05rem; color: #e11d48; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
-        .guide-card p { font-size: 0.9rem; line-height: 1.6; color: #555; }
+        /* 🔥 이미지와 동일하게 구현한 주차 및 식사 안내 섹션 */
+        .sec-info { background-color: #ffffff; padding: 5rem 1.5rem; }
+        
+        .parking-title { font-size: 1.3rem; color: #e5a4af; font-weight: bold; margin-bottom: 2rem; letter-spacing: 1px; }
+        .info-text { font-size: 1rem; line-height: 1.8; color: #444; word-break: keep-all; }
+        
+        .dining-box {
+            position: relative;
+            border: 2px solid #f6d1d6; /* 핑크색 테두리 */
+            border-radius: 12px;
+            padding: 3rem 1rem 2rem 1rem;
+            margin-top: 4.5rem;
+        }
+        
+        .dining-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f6d1d6; /* 핑크색 뱃지 배경 */
+            color: #ffffff;
+            font-size: 1.1rem;
+            padding: 8px 35px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
 
+        .dining-text {
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        /* 지도 & 계좌 */
         .sec-map { background-color: #1c1c1c; color: white; }
-        .sec-map h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
-        .map-info { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; color: #d1d5db; }
+        .sec-map h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
+        .map-info { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; color: #d1d5db; }
         .map-info strong { color: white; font-size: 1.1rem; }
 
         .sec-account { background-color: #1c1c1c; border-top: 1px dashed #444; padding-bottom: 4rem; }
-        .sec-account h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
+        .sec-account h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         
         details { background-color: #2a2a2a; border-radius: 8px; margin-bottom: 1rem; text-align: left; overflow: hidden; }
         summary { padding: 1rem; color: white; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transition: transform 0.3s; }
         details[open] summary::after { transform: rotate(45deg); }
-        .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.9rem; border-top: 1px solid #ddd; }
+        .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.95rem; border-top: 1px solid #ddd; }
         .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .copy-btn { background-color: #e5e7eb; border: none; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; }
+        .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
 
         .bottom-bar { background-color: #fcfafa; padding: 1.5rem 1rem; display: flex; gap: 0.5rem; }
         .btn { flex: 1; padding: 1rem; border-radius: 999px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; }
@@ -76,8 +106,7 @@
     <div class="wrap">
         
         <section class="sec-main">
-            <img src="images/main.webp" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;" loading="lazy">
-            
+            <img src="images/main.jpg" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;" loading="lazy">
             <div class="fade-up" style="margin-top: 3rem;">
                 <h1 class="title-eng">Wedding Invitation</h1>
                 <p class="names">정범영 &amp; 방소현</p>
@@ -96,46 +125,54 @@
                 축복해 주시면 감사하겠습니다.
             </p>
             <div style="margin: 3rem auto 0; width: 80%; border-radius: 100px 100px 0 0; overflow: hidden;">
-                <img src="images/sub.webp" alt="서브 사진" style="width: 100%; height: 350px; object-fit: cover;" loading="lazy">
+                <img src="images/sub.jpg" alt="서브 사진" style="width: 100%; height: 350px; object-fit: cover;" loading="lazy">
             </div>
         </section>
 
         <section class="sec-gallery fade-up">
             <h2 class="title-eng">Gallery</h2>
             <div class="grid">
-                <img src="images/gallery-1.webp" alt="갤러리 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
-                <img src="images/gallery-2.webp" alt="갤러리 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
-                <img src="images/gallery-3.webp" alt="갤러리 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
-                <img src="images/gallery-4.webp" alt="갤러리 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
-                <img src="images/gallery-5.webp" alt="갤러리 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
-                <img src="images/gallery-6.webp" alt="갤러리 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-1.jpg" alt="갤러리 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-2.jpg" alt="갤러리 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-3.jpg" alt="갤러리 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-4.jpg" alt="갤러리 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-5.jpg" alt="갤러리 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-6.jpg" alt="갤러리 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
             </div>
         </section>
 
-        <section class="sec-guide fade-up">
-            <h2>안내 사항</h2>
+        <section class="sec-info fade-up">
             
-            <div class="guide-card">
-                <h3>🚗 주차 안내</h3>
-                <p>
-                    • <strong>가천대학교 비전타워 지하 4층 주차장</strong>을 이용해 주세요.<br>
-                    • 주차는 <strong>온종일 무료</strong>이며, 별도의 주차권이나 등록은 필요하지 않습니다.
-                </p>
+            <div class="parking-title">주차안내</div>
+            <div class="info-text">
+                가천대학교 비전타워 지하4층<br>
+                주차장을 이용하시면 보다 편하게 오실 수 있습니<br>
+                다.<br>
+                온종일 주차 무료이며, 주차권 등록 필요 없습니<br>
+                다.
             </div>
 
-            <div class="guide-card">
-                <h3>🍽️ 식사 안내</h3>
-                <p>
-                    • 연회장은 <strong>7층</strong>에 위치해 있습니다.<br>
-                    • 식사 시간은 예식 시간 전후로 여유 있게 즐기실 수 있도록 준비되어 있습니다.
-                </p>
+            <div class="dining-box">
+                <div class="dining-badge">식사안내</div>
+                <div class="dining-text">
+                    식사장소는 7층 연회장 입니다.<br>
+                    * 식사시간 : 예식 20분 전부터 입장 가능합니다.<br>
+                    * 어린이식권 : 만 5세 ~ 7세는 어린이 식권으로<br>
+                    요청해주세요.<br>
+                    * 한상차림 안내 : 식사는 한상차림으로<br>
+                    제공됩니다.<br>
+                    편하게 앉아서 식사해주세요.<br>
+                    스테이크, 모둠회, 전복구이를 제외한 모든 음식은<br>
+                    리필 가능하니 편하게 말씀해주세요.
+                </div>
             </div>
+
         </section>
 
         <section class="sec-map fade-up">
             <h2>오시는 길</h2>
             <div style="width: 100%; height: 250px; border-radius: 8px; overflow: hidden; background-color: #ddd;">
-                <img src="images/location_map.webp" alt="오시는 길 지도" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                <img src="images/location_map.jpg" alt="오시는 길 지도" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
             </div>
             <p class="map-info">
                 <strong>가천컨벤션센터</strong><br>
@@ -183,7 +220,6 @@
     </div>
 
     <script>
-        // 스크롤 애니메이션 인터섹션 오버저버
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
