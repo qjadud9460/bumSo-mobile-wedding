@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>정범영과 방소현 결혼합니다🤍</title>
     <link rel="icon" href="images/favicon_1.png" type="image/png">
@@ -14,7 +13,6 @@
     <meta property="og:type" content="website" />
     
     <style>
-        /* 1. 구글 폰트 제거 -> 기기 내장(시스템) 기본 폰트 사용 (로딩시간 0초) */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
@@ -32,10 +30,7 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 2. 임시 이미지(Placeholder) 대신 로딩 없는 CSS 색상 박스로 대체 */
-        .dummy-img { background-color: #ddd; color: #888; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; width: 100%; }
-
-        /* 각 섹션 스타일 (기존과 동일) */
+        /* 각 섹션 스타일 */
         .sec-main { background-color: #fad4da; padding-top: 0; padding-bottom: 4rem; }
         .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
         .sec-main .date { font-size: 0.95rem; margin-top: 1rem; line-height: 1.6; }
@@ -43,14 +38,17 @@
         .sec-invite { background-color: #1c1c1c; color: white; }
         .sec-invite h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2.4; font-size: 0.95rem; color: #e5e7eb; }
-        
-        .sec-dday { background-color: #fad4da; }
-        .dday-box { background-color: white; padding: 1.5rem; border-radius: 12px; display: inline-block; margin-top: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .dday-box strong { font-size: 1.2rem; color: #e11d48; }
 
         .sec-gallery { background-color: #f0eadd; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         
+        /* 안내 사항 섹션 스타일 (주차 및 식사 안내) */
+        .sec-guide { background-color: #faf9f6; text-align: left; padding: 4rem 1.5rem; }
+        .sec-guide h2 { color: #1c1c1c; font-size: 1.3rem; margin-bottom: 1.5rem; text-align: center; font-weight: bold; }
+        .guide-card { background-color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 1px solid #eee; }
+        .guide-card h3 { font-size: 1.05rem; color: #e11d48; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .guide-card p { font-size: 0.9rem; line-height: 1.6; color: #555; }
+
         .sec-map { background-color: #1c1c1c; color: white; }
         .sec-map h2 { color: #fad4da; font-size: 1.4rem; margin-bottom: 2rem; font-weight: normal; }
         .map-info { margin-top: 1.5rem; font-size: 0.9rem; line-height: 1.8; color: #d1d5db; }
@@ -78,7 +76,7 @@
     <div class="wrap">
         
         <section class="sec-main">
-            <img src="images/main.webp" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;">
+            <img src="images/main.webp" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;" loading="lazy">
             
             <div class="fade-up" style="margin-top: 3rem;">
                 <h1 class="title-eng">Wedding Invitation</h1>
@@ -97,33 +95,47 @@
                 지켜나갈 수 있게 앞날을<br>
                 축복해 주시면 감사하겠습니다.
             </p>
-            <div class="images/sub" style="height: 350px; margin: 3rem auto 0; width: 80%; border-radius: 100px 100px 0 0; background-color: #fad4da; color: #333;">서브 사진 자리</div>
-        </section>
-
-        <section class="sec-dday fade-up">
-            <h2 class="title-eng">Save the Date</h2>
-            <p style="margin-top:0.5rem; font-size:1.1rem;">2026. 10. 09</p>
-            <div class="dday-box">
-                정범영과 방소현의 결혼식이 <br><strong id="d-day-text">D-Day</strong> 남았습니다.
+            <div style="margin: 3rem auto 0; width: 80%; border-radius: 100px 100px 0 0; overflow: hidden;">
+                <img src="images/sub.webp" alt="서브 사진" style="width: 100%; height: 350px; object-fit: cover;" loading="lazy">
             </div>
         </section>
 
         <section class="sec-gallery fade-up">
             <h2 class="title-eng">Gallery</h2>
             <div class="grid">
-                <div class="images/gall_1" style="aspect-ratio: 1/1;">사진 1</div>
-                <div class="images/gall_2" style="aspect-ratio: 1/1;">사진 2</div>
-                <div class="images/gall_3" style="aspect-ratio: 1/1;">사진 3</div>
-                <div class="images/gall_4" style="aspect-ratio: 1/1;">사진 4</div>
-                <div class="images/gall_5" style="aspect-ratio: 1/1;">사진 5</div>
-                <div class="images/gall_6" style="aspect-ratio: 1/1;">사진 6</div>
+                <img src="images/gallery-1.webp" alt="갤러리 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-2.webp" alt="갤러리 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-3.webp" alt="갤러리 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-4.webp" alt="갤러리 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-5.webp" alt="갤러리 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-6.webp" alt="갤러리 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+            </div>
+        </section>
+
+        <section class="sec-guide fade-up">
+            <h2>안내 사항</h2>
+            
+            <div class="guide-card">
+                <h3>🚗 주차 안내</h3>
+                <p>
+                    • <strong>가천대학교 비전타워 지하 4층 주차장</strong>을 이용해 주세요.<br>
+                    • 주차는 <strong>온종일 무료</strong>이며, 별도의 주차권이나 등록은 필요하지 않습니다.
+                </p>
+            </div>
+
+            <div class="guide-card">
+                <h3>🍽️ 식사 안내</h3>
+                <p>
+                    • 연회장은 <strong>7층</strong>에 위치해 있습니다.<br>
+                    • 식사 시간은 예식 시간 전후로 여유 있게 즐기실 수 있도록 준비되어 있습니다.
+                </p>
             </div>
         </section>
 
         <section class="sec-map fade-up">
             <h2>오시는 길</h2>
             <div style="width: 100%; height: 250px; border-radius: 8px; overflow: hidden; background-color: #ddd;">
-                <img src="images/location_map.webp" alt="오시는 길 지도" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="images/location_map.webp" alt="오시는 길 지도" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
             </div>
             <p class="map-info">
                 <strong>가천컨벤션센터</strong><br>
@@ -171,17 +183,7 @@
     </div>
 
     <script>
-        // 자바스크립트 D-Day 계산 기준일 업데이트 완료
-        const weddingDate = new Date("2026-10-09T00:00:00").getTime();
-        const today = new Date().getTime();
-        const gap = weddingDate - today;
-        const dDay = Math.ceil(gap / (1000 * 60 * 60 * 24));
-        
-        const dDayText = document.getElementById("d-day-text");
-        if (dDay > 0) dDayText.innerText = `D-${dDay}`;
-        else if (dDay === 0) dDayText.innerText = "D-Day";
-        else dDayText.innerText = `D+${Math.abs(dDay)}`;
-
+        // 스크롤 애니메이션 인터섹션 오버저버
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
