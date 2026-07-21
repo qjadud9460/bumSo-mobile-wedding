@@ -257,15 +257,19 @@
             Kakao.Share.sendDefault({
                 objectType: 'feed',
                 content: {
-                    title: '정범영 🤍 방소현 결혼합니다',
-                    description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
+                    // 1. 제목: 사진처럼 이름과 하트 기호 적용
+                    title: '정범영 ♥ 방소현', 
+                    
+                    // 2. 설명: 날짜 적고 \n 으로 줄바꿈한 뒤 장소 기입
+                    description: '2026년 10월 9일 (금) 오후 5시\n가천컨벤션센터', 
+                    
                     imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.jpg',
                     link: {
                         mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
                         webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
                     },
                 },
-                // 버튼 배열에 '청첩장 보기' 하나만 남겨서 위치보기 버튼이 안 뜨게 설정
+                // 3. 버튼: 위치보기는 빼고 '청첩장 보기'만 단독으로 남김
                 buttons: [
                     {
                         title: '청첩장 보기',
