@@ -68,7 +68,7 @@
         .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
         
-        /* 서브 사진 나란히 (sub_1.webp, sub_2.webp) */
+        /* 서브 사진 나란히 */
         .sub-photos { display: flex; gap: 10px; margin-top: 3rem; }
         .sub-photo-item { flex: 1; text-align: center; }
         .sub-photo-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
@@ -81,9 +81,18 @@
         .hidden-gallery.show { display: grid; }
         .more-btn { background-color: #1c1c1c; color: #fff; border: none; padding: 10px 24px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; margin-top: 2rem; }
 
-        /* 달력 */
-        .sec-calendar { background-color: #fad4da; padding: 3rem 1.5rem; }
-        .sec-calendar img { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        /* --- [수정됨] 달력 섹션 (좌우 꽉 차게 변경) --- */
+        .sec-calendar { 
+            background-color: #fad4da; 
+            padding: 0; /* 여백 제거 */
+        }
+        .sec-calendar img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            border-radius: 0; /* 둥근 모서리 제거하여 꽉 차게 연출 */
+            box-shadow: none; 
+        }
 
         /* 주차 및 식사 */
         .sec-info { background-color: #ffffff; padding: 5rem 1.5rem; }
@@ -93,7 +102,7 @@
         .dining-badge { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background-color: #f6d1d6; color: #ffffff; font-size: 1.1rem; padding: 8px 35px; border-radius: 30px; font-weight: 500; }
         .dining-text { font-size: 0.95rem; line-height: 1.9; color: #444; }
 
-        /* 오시는 길 (지도 전체가 잘 보이도록 수정) */
+        /* 오시는 길 */
         .sec-map { background-color: #1c1c1c; color: white; }
         .sec-map h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .map-container { width: 100%; border-radius: 8px; overflow: hidden; background-color: #fff; }
@@ -114,7 +123,7 @@
         .account-row:last-child { margin-bottom: 0; }
         .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
 
-        /* 하단 바 (뒷 배경 투명화 처리) */
+        /* 하단 바 */
         .bottom-bar { 
             background: linear-gradient(to top, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0)); 
             padding: 1rem; 
@@ -132,7 +141,7 @@
         .btn-link { background-color: #e5e7eb; color: #333; }
         .btn-kakao { background-color: #fae100; color: #3c1e1e; }
 
-        /* BGM 버튼 (왼쪽 상단 고정) */
+        /* BGM 버튼 */
         .bgm-btn {
             position: absolute; 
             top: 20px; 
@@ -213,12 +222,9 @@
             <button class="more-btn" id="moreBtn" onclick="toggleGallery()">사진 더보기 ∨</button>
         </section>
 
-        <!-- 달력 -->
+        <!-- 달력 (글자 제거 및 좌우 꽉 찬 이미지 적용) -->
         <section class="sec-calendar fade-up">
-            <h2 class="title-eng" style="color: #1c1c1c;">Save the Date</h2>
-            <div style="margin-top: 1.5rem;">
-                <img src="images/calendar.webp" alt="10월 9일 달력" loading="lazy">
-            </div>
+            <img src="images/calendar.webp" alt="10월 9일 달력" loading="lazy">
         </section>
 
         <!-- 주차 및 식사 안내 -->
@@ -244,7 +250,7 @@
             </div>
         </section>
 
-        <!-- 오시는 길 (지도 전체가 잘 보이도록 수정됨) -->
+        <!-- 오시는 길 -->
         <section class="sec-map fade-up">
             <h2>오시는 길</h2>
             <div class="map-container">
@@ -301,7 +307,7 @@
             </details>
         </section>
 
-        <!-- 하단 바 (배경 투명화) -->
+        <!-- 하단 바 -->
         <div class="bottom-bar">
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
             <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
