@@ -21,9 +21,17 @@
             justify-content: center;
             color: #333;
             font-size: 16px; 
+            overflow-y: scroll;
         }
         
-        .wrap { width: 100%; max-width: 430px; background-color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow-x: hidden; position: relative; }
+        .wrap { 
+            width: 100%; 
+            max-width: 430px; 
+            background-color: white; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            overflow-x: hidden; 
+            position: relative; 
+        }
         
         section { padding: 4rem 1.5rem; text-align: center; }
         .title-eng { font-size: 1.8rem; color: #1c1c1c; font-weight: 700; margin-bottom: 0.5rem; }
@@ -32,16 +40,30 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 & 초대글 */
-        .sec-main { background-color: #fad4da; padding-top: 0; padding-bottom: 3rem; }
-        .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
-        .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
+        /* --- [수정 완료] 메인 섹션 좌우 여백 제거 --- */
+        .sec-main { 
+            background-color: #fad4da; 
+            padding: 0; /* 좌우 및 상단 패딩 제거 */
+            padding-bottom: 3rem;
+            margin-bottom: 0;
+        }
+        .sec-main img {
+            width: 100%; 
+            height: 550px; 
+            object-fit: cover; 
+            display: block; /* 이미지 하단 빈틈 제거 */
+        }
+        .sec-main .main-content {
+            padding: 0 1.5rem; /* 텍스트 영역에만 좌우 여백 부여 */
+            margin-top: 3rem;
+        }
+        /* ------------------------------------------- */
 
         .sec-invite { background-color: #1c1c1c; color: white; }
         .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
         
-        /* 1. 신랑/신부 나란히 서브 사진 배치 스타일 */
+        /* 신랑/신부 나란히 서브 사진 배치 스타일 */
         .sub-photos {
             display: flex;
             gap: 10px;
@@ -68,7 +90,6 @@
         .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         
-        /* 3. 추가 갤러리 숨김 처리 */
         .hidden-gallery { display: none; }
         .hidden-gallery.show { display: grid; }
 
@@ -85,7 +106,7 @@
         }
         .more-btn:hover { background-color: #444; }
 
-        /* 4. 달력 섹션 스타일 */
+        /* 달력 섹션 스타일 */
         .sec-calendar { background-color: #fad4da; padding: 3rem 1.5rem; }
         .sec-calendar img { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
@@ -145,7 +166,7 @@
         .btn-link { background-color: #e5e7eb; color: #333; }
         .btn-kakao { background-color: #fae100; color: #3c1e1e; }
 
-        /* 2. 배경음악 플로팅 BGM 버튼 스타일 */
+        /* 배경음악 플로팅 BGM 버튼 스타일 */
         .bgm-btn {
             position: fixed;
             bottom: 90px;
@@ -174,8 +195,8 @@
         </button>
 
         <section class="sec-main">
-            <img src="images/main.webp" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;" loading="lazy">
-            <div class="fade-up" style="margin-top: 3rem;">
+            <img src="images/main.webp" alt="메인 사진" loading="lazy">
+            <div class="fade-up main-content">
                 <h1 class="title-eng">Wedding Invitation</h1>
                 <p class="names">정범영 &amp; 방소현</p>
                 <p class="date">2026년 10월 9일 금요일 오후 5시<br>가천컨벤션센터</p>
@@ -322,7 +343,7 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
 
-        // --- 2. 배경음악(BGM) ON/OFF 토글 기능 ---
+        // --- 배경음악(BGM) ON/OFF 토글 기능 ---
         const bgm = document.getElementById('bgm');
         const bgmToggleBtn = document.getElementById('bgmToggleBtn');
         let isPlaying = false;
@@ -342,7 +363,7 @@
             }
         }
 
-        // --- 3. 갤러리 더보기 펼치기 기능 ---
+        // --- 갤러리 더보기 펼치기 기능 ---
         function toggleGallery() {
             const moreGallery = document.getElementById('moreGallery');
             const moreBtn = document.getElementById('moreBtn');
