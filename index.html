@@ -31,7 +31,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
             overflow-x: hidden; 
             position: relative; 
-            padding-bottom: 50px; 
+            padding-bottom: 70px; 
         }
         
         section { padding: 4rem 1.5rem; text-align: center; }
@@ -41,7 +41,7 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 섹션 (좌우 꽉 찬 구조 및 왼쪽 상단 BGM 버튼 기준점) */
+        /* 메인 섹션 */
         .sec-main { 
             background-color: #fad4da; 
             padding: 0; 
@@ -56,7 +56,6 @@
             display: block; 
         }
 
-        /* 메인 텍스트 (애니메이션 제거, 일반 고정 텍스트) */
         .sec-main .main-content {
             padding: 0 1.5rem;
             margin-top: 3rem;
@@ -69,7 +68,7 @@
         .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
         
-        /* 서브 사진 나란히 */
+        /* 서브 사진 나란히 (sub_1.webp, sub_2.webp) */
         .sub-photos { display: flex; gap: 10px; margin-top: 3rem; }
         .sub-photo-item { flex: 1; text-align: center; }
         .sub-photo-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
@@ -94,10 +93,12 @@
         .dining-badge { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background-color: #f6d1d6; color: #ffffff; font-size: 1.1rem; padding: 8px 35px; border-radius: 30px; font-weight: 500; }
         .dining-text { font-size: 0.95rem; line-height: 1.9; color: #444; }
 
-        /* 오시는 길 */
+        /* 오시는 길 (지도 전체가 잘 보이도록 수정) */
         .sec-map { background-color: #1c1c1c; color: white; }
         .sec-map h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
-        .map-info { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; color: #d1d5db; }
+        .map-container { width: 100%; border-radius: 8px; overflow: hidden; background-color: #fff; }
+        .map-container img { width: 100%; height: auto; display: block; object-fit: contain; }
+        .map-info { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; color: #d1d5db; text-align: left; }
         .map-info strong { color: white; font-size: 1.1rem; }
 
         /* 계좌번호 */
@@ -109,16 +110,25 @@
         summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transition: transform 0.3s; }
         details[open] summary::after { transform: rotate(45deg); }
         .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.95rem; border-top: 1px solid #ddd; }
-        .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .account-row:last-child { margin-bottom: 0; }
         .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
 
-        /* 하단 바 */
+        /* 하단 바 (뒷 배경 투명화 처리) */
         .bottom-bar { 
-            background-color: #fcfafa; padding: 1rem; display: flex; gap: 0.5rem; 
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 430px; z-index: 1000; box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
+            background: linear-gradient(to top, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0)); 
+            padding: 1rem; 
+            display: flex; 
+            gap: 0.5rem; 
+            position: fixed; 
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 100%; 
+            max-width: 430px; 
+            z-index: 1000; 
         }
-        .btn { flex: 1; padding: 0.9rem; border-radius: 12px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; }
+        .btn { flex: 1; padding: 0.9rem; border-radius: 12px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .btn-link { background-color: #e5e7eb; color: #333; }
         .btn-kakao { background-color: #fae100; color: #3c1e1e; }
 
@@ -147,6 +157,7 @@
         
         <audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
 
+        <!-- 메인 섹션 -->
         <section class="sec-main">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBGM()">
                 🎵 BGM <span>OFF</span>
@@ -160,6 +171,7 @@
             </div>
         </section>
 
+        <!-- 초대글 -->
         <section class="sec-invite fade-up">
             <h2>초대합니다</h2>
             <p>
@@ -172,16 +184,17 @@
             </p>
             <div class="sub-photos">
                 <div class="sub-photo-item">
-                    <img src="images/sub_groom.webp" alt="신랑 서브 사진" loading="lazy">
+                    <img src="images/sub_1.webp" alt="신랑 서브 사진" loading="lazy">
                     <span>신랑 정범영</span>
                 </div>
                 <div class="sub-photo-item">
-                    <img src="images/sub_bride.webp" alt="신부 서브 사진" loading="lazy">
+                    <img src="images/sub_2.webp" alt="신부 서브 사진" loading="lazy">
                     <span>신부 방소현</span>
                 </div>
             </div>
         </section>
 
+        <!-- 갤러리 -->
         <section class="sec-gallery fade-up">
             <h2 class="title-eng">Gallery</h2>
             <div class="grid" id="defaultGallery">
@@ -200,6 +213,7 @@
             <button class="more-btn" id="moreBtn" onclick="toggleGallery()">사진 더보기 ∨</button>
         </section>
 
+        <!-- 달력 -->
         <section class="sec-calendar fade-up">
             <h2 class="title-eng" style="color: #1c1c1c;">Save the Date</h2>
             <div style="margin-top: 1.5rem;">
@@ -207,6 +221,7 @@
             </div>
         </section>
 
+        <!-- 주차 및 식사 안내 -->
         <section class="sec-info fade-up">
             <div class="parking-title">주차안내</div>
             <div class="info-text">
@@ -229,20 +244,21 @@
             </div>
         </section>
 
+        <!-- 오시는 길 (지도 전체가 잘 보이도록 수정됨) -->
         <section class="sec-map fade-up">
             <h2>오시는 길</h2>
-            <div style="width: 100%; height: 250px; border-radius: 8px; overflow: hidden; background-color: #ddd;">
+            <div class="map-container">
                 <img src="images/location_map.webp" alt="오시는 길 지도" loading="lazy">
             </div>
             <p class="map-info">
                 <strong>가천컨벤션센터</strong><br>
                 경기 성남시 수정구 성남대로 1342 (비전타워)<br><br>
-                [지하철] 수인분당선 가천대역 1번 출구<br>
-                도보 1분(지하 연결통로)<br>
-                [주차] 약 1,500대 동시 주차 가능 (무료)
+                <strong>[지하철]</strong> 수인분당선 가천대역 1번 출구 도보 1분(지하 연결통로)<br>
+                <strong>[주차]</strong> 약 1,500대 동시 주차 가능 (무료)
             </p>
         </section>
 
+        <!-- 마음 전하실 곳 -->
         <section class="sec-account fade-up">
             <h2>마음 전하실 곳</h2>
             <details>
@@ -262,15 +278,30 @@
                 <div class="account-body">
                     <div class="account-row">
                         <div>
-                            <strong>신한 110-123-456789</strong><br>
+                            <strong>국민 405-24-0099-945</strong><br>
+                            <span style="color:#666; font-size:0.8rem;">예금주: 방득춘</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyAccount('405240099945')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <div>
+                            <strong>기업 467-016958-02-010</strong><br>
+                            <span style="color:#666; font-size:0.8rem;">예금주: 김은정</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyAccount('46701695802010')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <div>
+                            <strong>카카오뱅크 3333-06-8687692</strong><br>
                             <span style="color:#666; font-size:0.8rem;">예금주: 방소현</span>
                         </div>
-                        <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+                        <button class="copy-btn" onclick="copyAccount('3333068687692')">복사</button>
                     </div>
                 </div>
             </details>
         </section>
 
+        <!-- 하단 바 (배경 투명화) -->
         <div class="bottom-bar">
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
             <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
@@ -311,13 +342,11 @@
             }
         }
 
-        // 사용자가 화면을 터치/클릭하는 첫 순간 음악 자동 재생 (모바일 정책 대응)
         function triggerAutoPlay() {
             if (!isPlaying) {
                 bgm.play().then(() => {
                     bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
                     isPlaying = true;
-                    // 재생 성공 시 이벤트 제거
                     window.removeEventListener('click', triggerAutoPlay);
                     window.removeEventListener('touchstart', triggerAutoPlay);
                     window.removeEventListener('scroll', triggerAutoPlay);
