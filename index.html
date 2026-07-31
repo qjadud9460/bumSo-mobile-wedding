@@ -23,7 +23,7 @@
             font-size: 16px; 
         }
         
-        .wrap { width: 100%; max-width: 430px; background-color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow-x: hidden; }
+        .wrap { width: 100%; max-width: 430px; background-color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow-x: hidden; position: relative; }
         
         section { padding: 4rem 1.5rem; text-align: center; }
         .title-eng { font-size: 1.8rem; color: #1c1c1c; font-weight: 700; margin-bottom: 0.5rem; }
@@ -41,10 +41,54 @@
         .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
         
-        /* 갤러리 */
+        /* 1. 신랑/신부 나란히 서브 사진 배치 스타일 */
+        .sub-photos {
+            display: flex;
+            gap: 10px;
+            margin-top: 3rem;
+        }
+        .sub-photo-item {
+            flex: 1;
+            text-align: center;
+        }
+        .sub-photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .sub-photo-item span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #fad4da;
+        }
+        
+        /* 갤러리 및 더보기 스타일 */
         .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         
+        /* 3. 추가 갤러리 숨김 처리 */
+        .hidden-gallery { display: none; }
+        .hidden-gallery.show { display: grid; }
+
+        .more-btn {
+            background-color: #1c1c1c;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: background 0.3s;
+        }
+        .more-btn:hover { background-color: #444; }
+
+        /* 4. 달력 섹션 스타일 */
+        .sec-calendar { background-color: #fad4da; padding: 3rem 1.5rem; }
+        .sec-calendar img { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
         /* 주차 및 식사 안내 섹션 */
         .sec-info { background-color: #ffffff; padding: 5rem 1.5rem; }
         
@@ -100,11 +144,35 @@
         .btn { flex: 1; padding: 1rem; border-radius: 999px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; }
         .btn-link { background-color: #e5e7eb; color: #333; }
         .btn-kakao { background-color: #fae100; color: #3c1e1e; }
+
+        /* 2. 배경음악 플로팅 BGM 버튼 스타일 */
+        .bgm-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: rgba(28, 28, 28, 0.85);
+            color: #fad4da;
+            border: 1px solid #fad4da;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="wrap">
         
+        <audio id="bgm" src="images/bgm.mp3" loop></audio>
+        <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBGM()">
+            🎵 BGM <span>OFF</span>
+        </button>
+
         <section class="sec-main">
             <img src="images/main.webp" alt="메인 사진" style="width: 100%; height: 550px; object-fit: cover;" loading="lazy">
             <div class="fade-up" style="margin-top: 3rem;">
@@ -124,20 +192,44 @@
                 지켜나갈 수 있게 앞날을<br>
                 축복해 주시면 감사하겠습니다.
             </p>
-            <div style="margin: 3rem auto 0; width: 80%; border-radius: 100px 100px 0 0; overflow: hidden;">
-                <img src="images/sub.webp" alt="서브 사진" style="width: 100%; height: 350px; object-fit: cover;" loading="lazy">
+            
+            <div class="sub-photos">
+                <div class="sub-photo-item">
+                    <img src="images/sub_groom.webp" alt="신랑 서브 사진" loading="lazy">
+                    <span>신랑 정범영</span>
+                </div>
+                <div class="sub-photo-item">
+                    <img src="images/sub_bride.webp" alt="신부 서브 사진" loading="lazy">
+                    <span>신부 방소현</span>
+                </div>
             </div>
         </section>
 
         <section class="sec-gallery fade-up">
             <h2 class="title-eng">Gallery</h2>
-            <div class="grid">
+            
+            <div class="grid" id="defaultGallery">
                 <img src="images/gallery-1.webp" alt="갤러리 1" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
                 <img src="images/gallery-2.webp" alt="갤러리 2" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
                 <img src="images/gallery-3.webp" alt="갤러리 3" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
                 <img src="images/gallery-4.webp" alt="갤러리 4" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
                 <img src="images/gallery-5.webp" alt="갤러리 5" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
                 <img src="images/gallery-6.webp" alt="갤러리 6" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+            </div>
+
+            <div class="grid hidden-gallery" id="moreGallery">
+                <img src="images/gallery-7.webp" alt="갤러리 7" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-8.webp" alt="갤러리 8" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+                <img src="images/gallery-9.webp" alt="갤러리 9" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" loading="lazy">
+            </div>
+
+            <button class="more-btn" id="moreBtn" onclick="toggleGallery()">사진 더보기 ∨</button>
+        </section>
+
+        <section class="sec-calendar fade-up">
+            <h2 class="title-eng" style="color: #1c1c1c;">Save the Date</h2>
+            <div style="margin-top: 1.5rem;">
+                <img src="images/calendar.webp" alt="10월 9일 달력" loading="lazy">
             </div>
         </section>
 
@@ -214,7 +306,6 @@
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
             <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
         </div>
-
         
     </div>
 
@@ -230,6 +321,40 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+        // --- 2. 배경음악(BGM) ON/OFF 토글 기능 ---
+        const bgm = document.getElementById('bgm');
+        const bgmToggleBtn = document.getElementById('bgmToggleBtn');
+        let isPlaying = false;
+
+        function toggleBGM() {
+            if (isPlaying) {
+                bgm.pause();
+                bgmToggleBtn.innerHTML = "🎵 BGM <span>OFF</span>";
+                isPlaying = false;
+            } else {
+                bgm.play().then(() => {
+                    bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
+                    isPlaying = true;
+                }).catch(error => {
+                    alert('음악 재생을 실패했습니다. 파일 경로를 확인해주세요.');
+                });
+            }
+        }
+
+        // --- 3. 갤러리 더보기 펼치기 기능 ---
+        function toggleGallery() {
+            const moreGallery = document.getElementById('moreGallery');
+            const moreBtn = document.getElementById('moreBtn');
+            
+            moreGallery.classList.toggle('show');
+            
+            if (moreGallery.classList.contains('show')) {
+                moreBtn.innerText = "접기 ∧";
+            } else {
+                moreBtn.innerText = "사진 더보기 ∨";
+            }
+        }
 
         // --- 계좌번호 복사 기능 ---
         function copyAccount(accountNumber) {
@@ -259,7 +384,6 @@
                 content: {
                     title: '정범영 🤍 방소현 결혼합니다',
                     description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
-                    // 🚨 주의: 아래 주소에 사진 파일 이름이 정확한지 꼭 확인하세요!
                     imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.webp',
                     link: {
                         mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
@@ -278,6 +402,5 @@
             });
         }
     </script>
-
 </body>
 </html>
