@@ -41,13 +41,13 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 섹션 */
+        /* 메인 섹션 (좌우 꽉 찬 구조 및 왼쪽 상단 BGM 버튼 기준점) */
         .sec-main { 
             background-color: #fad4da; 
             padding: 0; 
             padding-bottom: 3rem;
             margin-bottom: 0;
-            position: relative; /* BGM 버튼 위치 기준점 */
+            position: relative; 
         }
         .sec-main img {
             width: 100%; 
@@ -56,76 +56,37 @@
             display: block; 
         }
 
-        /* 타이핑 애니메이션 텍스트 영역 */
+        /* 메인 텍스트 (애니메이션 제거, 일반 고정 텍스트) */
         .sec-main .main-content {
             padding: 0 1.5rem;
             margin-top: 3rem;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
+        .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
+        .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
-        .typing-text {
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0 auto;
-            border-right: 2px solid #333;
-            animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        .type-line-1 { 
-            font-size: 1.5rem; font-weight: 700; color: #1c1c1c; letter-spacing: 1px;
-            animation: typing 1.5s steps(20, end); 
-            margin-bottom: 10px;
-        }
-        
-        .type-line-2 { 
-            font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; 
-            animation: typing 1.5s steps(15, end) 1.5s both; 
-            margin-top: 15px;
-        }
-        
-        .type-line-3 { 
-            font-size: 1rem; line-height: 1.6; margin-top: 15px;
-            white-space: normal; 
-            border-right: none; 
-            animation: fade-in 1s ease-in 3s both; 
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #333 }
-        }
-
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        /* 초대글 */
         .sec-invite { background-color: #1c1c1c; color: white; }
         .sec-invite h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .sec-invite p { line-height: 2; font-size: 0.95rem; color: #e5e7eb; }
         
+        /* 서브 사진 나란히 */
         .sub-photos { display: flex; gap: 10px; margin-top: 3rem; }
         .sub-photo-item { flex: 1; text-align: center; }
         .sub-photo-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
         .sub-photo-item span { display: block; margin-top: 8px; font-size: 0.9rem; color: #fad4da; }
         
+        /* 갤러리 */
         .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         .hidden-gallery { display: none; }
         .hidden-gallery.show { display: grid; }
         .more-btn { background-color: #1c1c1c; color: #fff; border: none; padding: 10px 24px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; margin-top: 2rem; }
 
+        /* 달력 */
         .sec-calendar { background-color: #fad4da; padding: 3rem 1.5rem; }
         .sec-calendar img { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
+        /* 주차 및 식사 */
         .sec-info { background-color: #ffffff; padding: 5rem 1.5rem; }
         .parking-title { font-size: 1.3rem; color: #e5a4af; font-weight: bold; margin-bottom: 2rem; }
         .info-text { font-size: 1rem; line-height: 1.8; color: #444; word-break: keep-all; }
@@ -133,11 +94,13 @@
         .dining-badge { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background-color: #f6d1d6; color: #ffffff; font-size: 1.1rem; padding: 8px 35px; border-radius: 30px; font-weight: 500; }
         .dining-text { font-size: 0.95rem; line-height: 1.9; color: #444; }
 
+        /* 오시는 길 */
         .sec-map { background-color: #1c1c1c; color: white; }
         .sec-map h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         .map-info { margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.8; color: #d1d5db; }
         .map-info strong { color: white; font-size: 1.1rem; }
 
+        /* 계좌번호 */
         .sec-account { background-color: #1c1c1c; border-top: 1px dashed #444; padding-bottom: 4rem; }
         .sec-account h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
         details { background-color: #2a2a2a; border-radius: 8px; margin-bottom: 1rem; text-align: left; overflow: hidden; }
@@ -149,6 +112,7 @@
         .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
         .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
 
+        /* 하단 바 */
         .bottom-bar { 
             background-color: #fcfafa; padding: 1rem; display: flex; gap: 0.5rem; 
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -158,7 +122,7 @@
         .btn-link { background-color: #e5e7eb; color: #333; }
         .btn-kakao { background-color: #fae100; color: #3c1e1e; }
 
-        /* --- [수정됨] BGM 버튼: 왼쪽 상단 고정 스타일 --- */
+        /* BGM 버튼 (왼쪽 상단 고정) */
         .bgm-btn {
             position: absolute; 
             top: 20px; 
@@ -181,7 +145,7 @@
 <body>
     <div class="wrap">
         
-        <audio id="bgm" src="images/bgm.mp3" loop></audio>
+        <audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
 
         <section class="sec-main">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBGM()">
@@ -189,10 +153,10 @@
             </button>
 
             <img src="images/main.webp" alt="메인 사진" loading="lazy">
-            <div class="main-content">
-                <div class="typing-text title-eng type-line-1">Wedding Invitation</div>
-                <div class="typing-text names type-line-2">정범영 &amp; 방소현</div>
-                <div class="type-line-3 date">2026년 10월 9일 금요일 오후 5시<br>가천컨벤션센터</div>
+            <div class="fade-up main-content">
+                <h1 class="title-eng">Wedding Invitation</h1>
+                <p class="names">정범영 &amp; 방소현</p>
+                <p class="date">2026년 10월 9일 금요일 오후 5시<br>가천컨벤션센터</p>
             </div>
         </section>
 
@@ -272,154 +236,4 @@
             </div>
             <p class="map-info">
                 <strong>가천컨벤션센터</strong><br>
-                경기 성남시 수정구 성남대로 1342 (비전타워)<br><br>
-                [지하철] 수인분당선 가천대역 1번 출구<br>
-                도보 1분(지하 연결통로)<br>
-                [주차] 약 1,500대 동시 주차 가능 (무료)
-            </p>
-        </section>
-
-        <section class="sec-account fade-up">
-            <h2>마음 전하실 곳</h2>
-            <details>
-                <summary>신랑측 계좌번호</summary>
-                <div class="account-body">
-                    <div class="account-row">
-                        <div>
-                            <strong>국민 1234-567-890123</strong><br>
-                            <span style="color:#666; font-size:0.8rem;">예금주: 정범영</span>
-                        </div>
-                        <button class="copy-btn" onclick="copyAccount('1234567890123')">복사</button>
-                    </div>
-                </div>
-            </details>
-            <details>
-                <summary>신부측 계좌번호</summary>
-                <div class="account-body">
-                    <div class="account-row">
-                        <div>
-                            <strong>신한 110-123-456789</strong><br>
-                            <span style="color:#666; font-size:0.8rem;">예금주: 방소현</span>
-                        </div>
-                        <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
-                    </div>
-                </div>
-            </details>
-        </section>
-
-        <div class="bottom-bar">
-            <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
-            <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
-        </div>
-        
-    </div>
-
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.8.0/kakao.min.js"></script>
-
-    <script>
-        // --- 스크롤 애니메이션 ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-
-        // --- BGM 자동재생 및 토글 기능 ---
-        const bgm = document.getElementById('bgm');
-        const bgmToggleBtn = document.getElementById('bgmToggleBtn');
-        let isPlaying = false;
-
-        function toggleBGM() {
-            if (isPlaying) {
-                bgm.pause();
-                bgmToggleBtn.innerHTML = "🎵 BGM <span>OFF</span>";
-                isPlaying = false;
-            } else {
-                bgm.play().then(() => {
-                    bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
-                    isPlaying = true;
-                }).catch(error => {
-                    console.log('재생 대기 중');
-                });
-            }
-        }
-
-        // 페이지 접속 후 첫 터치/클릭 시 자동 음악 재생 (모바일 브라우저 정책 우회)
-        window.addEventListener('click', function autoPlayBGM() {
-            if (!isPlaying) {
-                bgm.play().then(() => {
-                    bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
-                    isPlaying = true;
-                }).catch(err => {
-                    console.log('자동재생 차단됨');
-                });
-            }
-            // 최초 1회 작동 후 이벤트 제거
-            window.removeEventListener('click', autoPlayBGM);
-        }, { once: true });
-
-        // --- 갤러리 더보기 펼치기 기능 ---
-        function toggleGallery() {
-            const moreGallery = document.getElementById('moreGallery');
-            const moreBtn = document.getElementById('moreBtn');
-            
-            moreGallery.classList.toggle('show');
-            
-            if (moreGallery.classList.contains('show')) {
-                moreBtn.innerText = "접기 ∧";
-            } else {
-                moreBtn.innerText = "사진 더보기 ∨";
-            }
-        }
-
-        // --- 계좌번호 복사 기능 ---
-        function copyAccount(accountNumber) {
-            navigator.clipboard.writeText(accountNumber).then(() => {
-                alert('계좌번호가 복사되었습니다.');
-            }).catch(() => {
-                alert('복사에 실패했습니다. 직접 선택하여 복사해주세요.');
-            });
-        }
-
-        // --- 일반 링크 복사 기능 ---
-        function copyLink() {
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('청첩장 주소가 복사되었습니다! 원하는 곳에 붙여넣기 해주세요.');
-            }).catch(() => {
-                alert('링크 복사에 실패했습니다. 브라우저 주소창을 직접 복사해주세요.');
-            });
-        }
-
-        // --- 카카오톡 공유하기 기능 ---
-        Kakao.init('917e8c9667f9e281855b969f5db5a056');
-        
-        function shareKakao() {
-            Kakao.Share.sendDefault({
-                objectType: 'feed',
-                content: {
-                    title: '정범영 🤍 방소현 결혼합니다',
-                    description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
-                    imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.webp',
-                    link: {
-                        mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
-                        webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
-                    },
-                },
-                buttons: [
-                    {
-                        title: '청첩장 보기',
-                        link: {
-                            mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
-                            webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
-                        },
-                    },
-                ],
-            });
-        }
-    </script>
-</body>
-</html>
+                경기 성남시 수정구 성남대로 1342 (비전
