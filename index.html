@@ -74,23 +74,29 @@
         .sub-photo-item img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
         .sub-photo-item span { display: block; margin-top: 8px; font-size: 0.9rem; color: #fad4da; }
         
-        /* 갤러리 */
+        /* 갤러리 (크기 고정 및 깨짐 방지 스타일 추가) */
         .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
+        .grid img {
+            width: 100%;
+            height: 120px; /* 칸 높이 고정 (원하시는 높이로 조절 가능) */
+            object-fit: cover; /* 이미지가 찌그러지지 않고 칸에 꽉 차게 잘림 */
+            display: block;
+        }
         .hidden-gallery { display: none; }
         .hidden-gallery.show { display: grid; }
         .more-btn { background-color: #1c1c1c; color: #fff; border: none; padding: 10px 24px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; margin-top: 2rem; }
 
-        /* --- [수정됨] 달력 섹션 (좌우 꽉 차게 변경) --- */
+        /* 달력 섹션 */
         .sec-calendar { 
             background-color: #fad4da; 
-            padding: 0; /* 여백 제거 */
+            padding: 0; 
         }
         .sec-calendar img { 
             width: 100%; 
             height: auto; 
             display: block; 
-            border-radius: 0; /* 둥근 모서리 제거하여 꽉 차게 연출 */
+            border-radius: 0; 
             box-shadow: none; 
         }
 
@@ -166,7 +172,6 @@
         
         <audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
 
-        <!-- 메인 섹션 -->
         <section class="sec-main">
             <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBGM()">
                 🎵 BGM <span>OFF</span>
@@ -180,7 +185,6 @@
             </div>
         </section>
 
-        <!-- 초대글 -->
         <section class="sec-invite fade-up">
             <h2>초대합니다</h2>
             <p>
@@ -203,7 +207,6 @@
             </div>
         </section>
 
-        <!-- 갤러리 -->
         <section class="sec-gallery fade-up">
             <h2 class="title-eng">Gallery</h2>
             <div class="grid" id="defaultGallery">
@@ -222,12 +225,10 @@
             <button class="more-btn" id="moreBtn" onclick="toggleGallery()">사진 더보기 ∨</button>
         </section>
 
-        <!-- 달력 (글자 제거 및 좌우 꽉 찬 이미지 적용) -->
         <section class="sec-calendar fade-up">
             <img src="images/calendar.webp" alt="10월 9일 달력" loading="lazy">
         </section>
 
-        <!-- 주차 및 식사 안내 -->
         <section class="sec-info fade-up">
             <div class="parking-title">주차안내</div>
             <div class="info-text">
@@ -250,7 +251,6 @@
             </div>
         </section>
 
-        <!-- 오시는 길 -->
         <section class="sec-map fade-up">
             <h2>오시는 길</h2>
             <div class="map-container">
@@ -264,7 +264,6 @@
             </p>
         </section>
 
-        <!-- 마음 전하실 곳 -->
         <section class="sec-account fade-up">
             <h2>마음 전하실 곳</h2>
             <details>
@@ -307,7 +306,6 @@
             </details>
         </section>
 
-        <!-- 하단 바 -->
         <div class="bottom-bar">
             <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
             <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
