@@ -74,7 +74,7 @@
             display: block;
         }
         
-        /* 갤러리 섹션 (좌우 여백 없음, 3열 6행 = 총 18장) */
+        /* [수정됨] 갤러리 섹션 (좌우 여백 없음, 3열 6행 = 총 18장) */
         .sec-gallery { 
             background-color: #000; 
             padding: 0 !important; 
@@ -82,13 +82,13 @@
         .grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 2px; 
+            gap: 2px; /* 사진 사이 미세한 간격 (원하시면 0px로 변경 가능) */
             margin: 0; 
             padding: 0;
         }
         .grid img {
             width: 100%;
-            aspect-ratio: 1 / 1; 
+            aspect-ratio: 1 / 1; /* 정사각형 비율 고정 */
             object-fit: cover; 
             display: block;
             cursor: pointer;
@@ -98,7 +98,7 @@
             opacity: 0.8;
         }
 
-        /* 팝업 라이트박스 스타일 */
+        /* 팝업 라이트박스 스웨거 스타일 */
         .lightbox {
             position: fixed;
             top: 0;
@@ -111,7 +111,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            touch-action: pan-y;
         }
         .lightbox.active {
             display: flex;
@@ -120,8 +119,6 @@
             max-width: 100%;
             max-height: 80vh;
             object-fit: contain;
-            user-select: none;
-            -webkit-user-drag: none;
         }
         .lightbox-close {
             position: absolute;
@@ -133,7 +130,6 @@
             border: none;
             cursor: pointer;
             padding: 10px;
-            z-index: 10000;
         }
         .lightbox-nav {
             position: absolute;
@@ -146,7 +142,6 @@
             padding: 15px 12px;
             cursor: pointer;
             border-radius: 50%;
-            z-index: 10000;
         }
         .lightbox-prev { left: 15px; }
         .lightbox-next { right: 15px; }
@@ -373,3 +368,158 @@
                         </div>
                         <button class="copy-btn" onclick="copyAccount('46701695802010')">복사</button>
                     </div>
+                    <div class="account-row">
+                        <div>
+                            <strong>카카오뱅크 3333-06-8687692</strong><br>
+                            <span style="color:#666; font-size:0.8rem;">예금주: 방소현</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyAccount('3333068687692')">복사</button>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <div class="bottom-bar">
+            <button class="btn btn-link" onclick="copyLink()">링크 복사</button>
+            <button class="btn btn-kakao" onclick="shareKakao()">카카오톡 공유</button>
+        </div>
+        
+    </div>
+
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.8.0/kakao.min.js"></script>
+
+    <script>
+        // --- 스크롤 애니메이션 ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+        // --- BGM 자동재생 및 토글 기능 ---
+        const bgm = document.getElementById('bgm');
+        const bgmToggleBtn = document.getElementById('bgmToggleBtn');
+        let isPlaying = false;
+
+        function toggleBGM() {
+            if (isPlaying) {
+                bgm.pause();
+                bgmToggleBtn.innerHTML = "🎵 BGM <span>OFF</span>";
+                isPlaying = false;
+            } else {
+                bgm.play().then(() => {
+                    bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
+                    isPlaying = true;
+                }).catch(error => {
+                    console.log('재생 실패');
+                });
+            }
+        }
+
+        function triggerAutoPlay() {
+            if (!isPlaying) {
+                bgm.play().then(() => {
+                    bgmToggleBtn.innerHTML = "🎶 BGM <span>ON</span>";
+                    isPlaying = true;
+                    window.removeEventListener('click', triggerAutoPlay);
+                    window.removeEventListener('touchstart', triggerAutoPlay);
+                    window.removeEventListener('scroll', triggerAutoPlay);
+                }).catch(err => {
+                    console.log('상호작용 대기중');
+                });
+            }
+        }
+
+        window.addEventListener('click', triggerAutoPlay);
+        window.addEventListener('touchstart', triggerAutoPlay);
+        window.addEventListener('scroll', triggerAutoPlay);
+
+        // --- 갤러리 라이트박스(팝업 슬라이드) 기능 ---
+        const images = [];
+        for (let i = 1; i <= 18; i++) {
+            images.push(`images/gallery-${i}.webp`);
+        }
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox') {
+                document.getElementById('lightbox').classList.remove('active');
+            }
+        }
+
+        function closeLightboxDirect() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightboxImg').src = images[currentIndex];
+            document.getElementById('lightboxCounter').innerText = `${currentIndex + 1} / ${images.length}`;
+        }
+
+        // --- 계좌번호 복사 기능 ---
+        function copyAccount(accountNumber) {
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert('계좌번호가 복사되었습니다.');
+            }).catch(() => {
+                alert('복사에 실패했습니다. 직접 선택하여 복사해주세요.');
+            });
+        }
+
+        // --- 일반 링크 복사 기능 ---
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('청첩장 주소가 복사되었습니다! 원하는 곳에 붙여넣기 해주세요.');
+            }).catch(() => {
+                alert('링크 복사에 실패했습니다. 브라우저 주소창을 직접 복사해주세요.');
+            });
+        }
+
+        // --- 카카오톡 공유하기 기능 ---
+        Kakao.init('917e8c9667f9e281855b969f5db5a056');
+        
+        function shareKakao() {
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '정범영 🤍 방소현 결혼합니다',
+                    description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
+                    imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.webp',
+                    link: {
+                        mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                        webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                    },
+                },
+                buttons: [
+                    {
+                        title: '청첩장 보기',
+                        link: {
+                            mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                            webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
+                        },
+                    },
+                ],
+            });
+        }
+    </script>
+</body>
+</html>
