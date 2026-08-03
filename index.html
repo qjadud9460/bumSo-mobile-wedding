@@ -63,65 +63,24 @@
         .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
         .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
-        /* [변경됨] 초대글 섹션 (이미지 레퍼런스 반영 감성 디자인) */
+        /* [변경됨] 통 이미지로 대체된 초대글 섹션 스타일 */
         .sec-invite { 
-            background-color: #1c1c1c; 
-            color: #e5e7eb; 
-            padding: 5rem 1.5rem;
+            background-color: #e5dfd5; /* 레퍼런스 이미지의 질감 배경색과 어울리는 톤 (원하시는 색상으로 변경 가능) */
+            padding: 0; 
         }
-        .sec-invite .invite-top-text {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: #d1d5db;
-            margin-bottom: 3rem;
-            word-break: keep-all;
-        }
-        .sec-invite h2 { 
-            color: #fad4da; 
-            font-size: 1.3rem; 
-            margin-bottom: 2rem; 
-            font-weight: 500; 
-            letter-spacing: 1px;
-        }
-        .sec-invite p { 
-            line-height: 2.2; 
-            font-size: 0.95rem; 
-            color: #e5e7eb; 
-            word-break: keep-all;
+        .sec-invite img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
-        /* 서브 사진 나란히 (이미지 스타일 연동) */
-        .sub-photos { 
-            display: flex; 
-            gap: 12px; 
-            margin-top: 3.5rem; 
-        }
-        .sub-photo-item { 
-            flex: 1; 
-            text-align: center; 
-        }
-        .sub-photo-item img { 
-            width: 100%; 
-            height: 260px; 
-            object-fit: cover; 
-            border-radius: 12px; 
-            border: 1px solid rgba(250, 212, 218, 0.2);
-        }
-        .sub-photo-item span { 
-            display: block; 
-            margin-top: 10px; 
-            font-size: 0.95rem; 
-            color: #fad4da; 
-            font-weight: 500;
-        }
-        
-        /* 갤러리 */
+        /* 갤러리 (크기 고정 및 깨짐 방지 스타일 추가) */
         .sec-gallery { background-color: #f0eadd; padding-bottom: 3rem; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
         .grid img {
             width: 100%;
-            height: 120px;
-            object-fit: cover;
+            height: 120px; /* 칸 높이 고정 (원하시는 높이로 조절 가능) */
+            object-fit: cover; /* 이미지가 찌그러지지 않고 칸에 꽉 차게 잘림 */
             display: block;
         }
         .hidden-gallery { display: none; }
@@ -227,25 +186,7 @@
         </section>
 
         <section class="sec-invite fade-up">
-            <p class="invite-top-text">
-                서로의 눈동자 속에 머물던 시간을 지나<br>
-                이제 한 곳을 함께 바라보는 깊은 사랑이 되려 합니다.<br><br>
-                기쁨의 웃음꽃이 피어나는 축제 같은 오늘,<br>
-                저희 마음 깊이 자리한 소중한 분들을 모십니다.<br><br>
-                다정한 마음으로 오셔서 축제를 함께 즐겨주시고,<br>
-                따스한 빛으로 저희의 앞날을 물들여 주시면 감사하겠습니다.
-            </p>
-
-            <div class="sub-photos">
-                <div class="sub-photo-item">
-                    <img src="images/sub_1.webp" alt="신랑 서브 사진" loading="lazy">
-                    <span>정해권·차엔경의 아들 정범영</span>
-                </div>
-                <div class="sub-photo-item">
-                    <img src="images/sub_2.webp" alt="신부 서브 사진" loading="lazy">
-                    <span>방득춘·김에정의 딸 방소현</span>
-                </div>
-            </div>
+            <img src="images/sub_section.webp" alt="초대글 및 서브 사진" loading="lazy">
         </section>
 
         <section class="sec-gallery fade-up">
