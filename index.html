@@ -111,7 +111,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            touch-action: pan-y; /* 수직 스크롤 방지 및 터치 최적화 */
+            touch-action: pan-y; /* 수직 스크롤 방지 및 모바일 스와이프 제어 최적화 */
         }
         .lightbox.active {
             display: flex;
@@ -153,4 +153,24 @@
         .lightbox-counter {
             color: #aaa;
             margin-top: 15px;
-            font
+            font-size: 0.9rem;
+        }
+
+        /* 달력 섹션 */
+        .sec-calendar { 
+            background-color: #fad4da; 
+            padding: 0; 
+        }
+        .sec-calendar img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            border-radius: 0; 
+            box-shadow: none; 
+        }
+
+        /* 주차 및 식사 */
+        .sec-info { background-color: #ffffff; padding: 5rem 1.5rem; }
+        .parking-title { font-size: 1.3rem; color: #e5a4af; font-weight: bold; margin-bottom: 2rem; }
+        .info-text { font-size: 1rem; line-height: 1.8; color: #444; word-break: keep-all; }
+        .dining-box { position: relative; border:
