@@ -63,60 +63,77 @@
         .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
         .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
-        /* [수정됨] 초대글 섹션 (HTML/CSS 구현) */
-        .sec-invite {
-            background: #f7f4ef;
-            background-image: radial-gradient(rgba(0,0,0,.02) 1px, transparent 1px);
-            background-size: 6px 6px;
-            padding: 80px 24px;
+        /* 초대글 */
+        .sec-invite{
+            background:#f5f2ec;
+            background-image:
+                radial-gradient(rgba(0,0,0,.025) 1px, transparent 1px);
+            background-size:6px 6px;
+        
+            padding:72px 28px;
         }
-        .invite-text {
-            text-align: center;
-            color: #666;
-            line-height: 2.0;
-            font-size: 17px;
-            letter-spacing: -0.3px;
+        
+        .invite-text{
+            color:#6f665d;
+            text-align:center;
+            line-height:2.05;
+            font-size:18px;
+            letter-spacing:-0.2px;
+            font-weight:300;
         }
-        .invite-text p {
-            margin-bottom: 45px;
+        
+        .invite-text p{
+            margin-bottom:46px;
         }
-        .couple-wrap {
-            margin-top: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 18px;
+        
+        .invite-text p:last-child{
+            margin-bottom:70px;
         }
-        .person {
-            flex: 1;
-            text-align: center;
+        
+        
+        /* 신랑신부 영역 */
+        .couple-wrap{
+            display:flex;
+            align-items:flex-end;
+            justify-content:center;
+            gap:20px;
         }
-        .person img {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            display: block;
-            border-radius: 2px;
+        
+        .person{
+            flex:1;
         }
-        .person p {
-            margin-top: 28px;
-            color: #555;
-            font-size: 17px;
-            line-height: 1.8;
-            word-break: keep-all;
+        
+        .person img{
+            width:100%;
+            display:block;
+            aspect-ratio:4 / 5;
+            object-fit:cover;
         }
-        .person strong {
-            font-weight: 700;
+        
+        .heart{
+            width:44px;
+            flex:0 0 44px;
+        
+            text-align:center;
+            font-size:28px;
+            color:#c9b2aa;
+        
+            margin-bottom:58px;
         }
-        .ring {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin-bottom: 58px;
+        
+        .person-name{
+            margin-top:28px;
+        
+            color:#5f5a56;
+        
+            font-size:17px;
+            line-height:1.8;
+            text-align:center;
+            word-break:keep-all;
+        }
+        
+        .person-name strong{
+            font-weight:500;
         }
 
         /* 갤러리 섹션 (좌우 여백 없음, 3열 6행 = 총 18장) */
@@ -296,35 +313,45 @@
         </section>
 
         <section class="sec-invite fade-up">
-            <div class="invite-text">
-                <p>
-                    서로의 눈동자 속에 머물던 시간을 지나<br>
-                    이제 한 곳을 함께 바라보는 깊은 사랑이 되려 합니다.
-                </p>
-                <p>
-                    기쁨의 웃음꽃이 피어나는 축제 같은 오늘,<br>
-                    저희 마음 깊이 자리한 소중한 분들을 모십니다.
-                </p>
-                <p>
-                    다정한 마음으로 오셔서 축제를 함께 즐겨주시고,<br>
-                    따스한 빛으로 저희의 앞날을 물들여 주시면 감사하겠습니다.
-                </p>
-            </div>
 
-            <div class="couple-wrap">
-                <div class="person">
-                    <img src="images/groom.webp" alt="신랑" loading="lazy">
-                    <p>정해권 · 차은경의 아들 <strong>정범영</strong></p>
-                </div>
-                <div class="ring">
-                    🤍
-                </div>
-                <div class="person">
-                    <img src="images/bride.webp" alt="신부" loading="lazy">
-                    <p>방득춘 · 김은정의 딸 <strong>방소현</strong></p>
+    <div class="invite-text">
+        <p>
+            서로의 눈동자 속에 머물던 시간을 지나<br>
+            이제 한 곳을 함께 바라보는 깊은 사랑이 되려 합니다.
+        </p>
+
+        <p>
+            기쁨의 웃음꽃이 피어나는 축제 같은 오늘,<br>
+            저희 마음 깊이 자리한 소중한 분들을 모십니다.
+        </p>
+
+        <p>
+            다정한 마음으로 오셔서 축제를 함께 즐겨주시고,<br>
+            따스한 빛으로 저희의 앞날을 물들여 주시면 감사하겠습니다.
+        </p>
+    </div>
+
+    <div class="couple-wrap">
+            <div class="person">
+                <img src="images/groom.webp" alt="신랑" loading="lazy">
+    
+                <div class="person-name">
+                    정해권·차은경의 아들
+                    <strong>정범영</strong>
                 </div>
             </div>
-        </section>
+            <div class="heart">
+                🤍
+            </div>
+            <div class="person">
+                <img src="images/bride.webp" alt="신부" loading="lazy">
+                <div class="person-name">
+                    방득춘·김은정의 딸
+                    <strong>방소현</strong>
+                </div>
+            </div>   
+        </div>    
+    </section>
 
         <section class="sec-gallery fade-up">
             <div class="grid">
