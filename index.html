@@ -63,17 +63,62 @@
         .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
         .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
-        /* 초대글 섹션 */
-        .sec-invite { 
-            background-color: #e5dfd5; 
-            padding: 0; 
+        /* [수정됨] 초대글 섹션 (HTML/CSS 구현) */
+        .sec-invite {
+            background: #f7f4ef;
+            background-image: radial-gradient(rgba(0,0,0,.02) 1px, transparent 1px);
+            background-size: 6px 6px;
+            padding: 80px 24px;
         }
-        .sec-invite img {
+        .invite-text {
+            text-align: center;
+            color: #666;
+            line-height: 2.0;
+            font-size: 17px;
+            letter-spacing: -0.3px;
+        }
+        .invite-text p {
+            margin-bottom: 45px;
+        }
+        .couple-wrap {
+            margin-top: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 18px;
+        }
+        .person {
+            flex: 1;
+            text-align: center;
+        }
+        .person img {
             width: 100%;
-            height: auto;
+            aspect-ratio: 4/5;
+            object-fit: cover;
             display: block;
+            border-radius: 2px;
         }
-        
+        .person p {
+            margin-top: 28px;
+            color: #555;
+            font-size: 17px;
+            line-height: 1.8;
+            word-break: keep-all;
+        }
+        .person strong {
+            font-weight: 700;
+        }
+        .ring {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 58px;
+        }
+
         /* 갤러리 섹션 (좌우 여백 없음, 3열 6행 = 총 18장) */
         .sec-gallery { 
             background-color: #000; 
@@ -111,8 +156,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            /* 모바일 화면에서 터치 스크롤 꼬임 방지 */
-            touch-action: none; 
+            touch-action: pan-y; 
         }
         .lightbox.active {
             display: flex;
@@ -252,7 +296,34 @@
         </section>
 
         <section class="sec-invite fade-up">
-            <img src="images/sub_section.webp" alt="초대글 및 서브 사진" loading="lazy">
+            <div class="invite-text">
+                <p>
+                    서로의 눈동자 속에 머물던 시간을 지나<br>
+                    이제 한 곳을 함께 바라보는 깊은 사랑이 되려 합니다.
+                </p>
+                <p>
+                    기쁨의 웃음꽃이 피어나는 축제 같은 오늘,<br>
+                    저희 마음 깊이 자리한 소중한 분들을 모십니다.
+                </p>
+                <p>
+                    다정한 마음으로 오셔서 축제를 함께 즐겨주시고,<br>
+                    따스한 빛으로 저희의 앞날을 물들여 주시면 감사하겠습니다.
+                </p>
+            </div>
+
+            <div class="couple-wrap">
+                <div class="person">
+                    <img src="images/groom.webp" alt="신랑" loading="lazy">
+                    <p>정해권 · 차은경의 아들 <strong>정범영</strong></p>
+                </div>
+                <div class="ring">
+                    🤍
+                </div>
+                <div class="person">
+                    <img src="images/bride.webp" alt="신부" loading="lazy">
+                    <p>방득춘 · 김은정의 딸 <strong>방소현</strong></p>
+                </div>
+            </div>
         </section>
 
         <section class="sec-gallery fade-up">
@@ -477,7 +548,7 @@
             document.getElementById('lightboxCounter').innerText = `${currentIndex + 1} / ${images.length}`;
         }
 
-        // --- 모바일 스와이프 기능 추가 ---
+        // --- 모바일 스와이프 기능 ---
         let touchStartX = 0;
         let touchEndX = 0;
         const lightbox = document.getElementById('lightbox');
@@ -485,13 +556,13 @@
         // 손가락이 터치 화면에 닿을 때 (시작점 저장)
         lightbox.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+        }, { passive: true });
 
         // 손가락이 터치 화면에서 떨어질 때 (끝점 저장 및 스와이프 계산)
         lightbox.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
-        });
+        }, { passive: true });
 
         function handleSwipe() {
             const swipeThreshold = 50; // 인식할 최소 스와이프 거리
