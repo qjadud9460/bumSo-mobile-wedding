@@ -17,12 +17,11 @@
         @font-face {
             font-family: 'Pretendard';
             src: url('images/PretendardVariable.ttf') format('truetype');
-            font-display: swap; /* 폰트 로딩 전 화면이 백지로 멈추는 현상 방지 (안전장치) */
+            font-display: swap; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            /* 1순위로 Pretendard 폰트 적용 */
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
             background-color: #f3f4f6;
             display: flex;
@@ -49,27 +48,19 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 섹션 */
+        /* 메인 섹션 (영상 적용) */
         .sec-main { 
             background-color: #fad4da; 
             padding: 0; 
-            padding-bottom: 3rem;
             margin-bottom: 0;
             position: relative; 
         }
-        .sec-main img {
+        .sec-main video {
             width: 100%; 
             height: 550px; 
             object-fit: cover; 
             display: block; 
         }
-
-        .sec-main .main-content {
-            padding: 0 1.5rem;
-            margin-top: 3rem;
-        }
-        .sec-main .names { font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; letter-spacing: 2px; }
-        .sec-main .date { font-size: 1rem; margin-top: 1rem; line-height: 1.6; }
 
         /* 초대글 섹션 */
         .sec-invite { 
@@ -82,7 +73,7 @@
             display: block;
         }
         
-        /* 갤러리 섹션 (좌우 여백 없음, 3열 6행 = 총 18장) */
+        /* 갤러리 섹션 */
         .sec-gallery { 
             background-color: #000; 
             padding: 0 !important; 
@@ -119,7 +110,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            /* 모바일 화면에서 터치 스크롤 꼬임 방지 */
             touch-action: none; 
         }
         .lightbox.active {
@@ -251,12 +241,7 @@
                 🎵 BGM <span>OFF</span>
             </button>
 
-            <img src="images/main.webp" alt="메인 사진" loading="lazy">
-            <div class="fade-up main-content">
-                <h1 class="title-eng">Wedding Invitation</h1>
-                <p class="names">정범영 &amp; 방소현</p>
-                <p class="date">2026년 10월 9일 금요일 오후 5시<br>가천컨벤션센터</p>
-            </div>
+            <video src="images/main_video.mp4" autoplay muted loop playsinline></video>
         </section>
 
         <section class="sec-invite fade-up">
@@ -490,24 +475,20 @@
         let touchEndX = 0;
         const lightbox = document.getElementById('lightbox');
 
-        // 손가락이 터치 화면에 닿을 때 (시작점 저장)
         lightbox.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         });
 
-        // 손가락이 터치 화면에서 떨어질 때 (끝점 저장 및 스와이프 계산)
         lightbox.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
 
         function handleSwipe() {
-            const swipeThreshold = 50; // 인식할 최소 스와이프 거리
+            const swipeThreshold = 50; 
             if (touchEndX < touchStartX - swipeThreshold) {
-                // 화면을 왼쪽으로 밀었을 때 -> 다음 사진
                 changeSlide(1);
             } else if (touchEndX > touchStartX + swipeThreshold) {
-                // 화면을 오른쪽으로 밀었을 때 -> 이전 사진
                 changeSlide(-1);
             }
         }
