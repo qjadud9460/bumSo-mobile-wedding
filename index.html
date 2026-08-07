@@ -55,8 +55,6 @@
             margin-bottom: 0;
             position: relative; 
         }
-        
-        /* 💡 height를 auto로 유지하여 영상 하단이 잘리지 않고 원본 비율대로 다 나옵니다. */
         .sec-main video {
             width: 100%; 
             height: auto; 
@@ -65,7 +63,6 @@
 
         /* 초대글 섹션 */
         .sec-invite { 
-            /* 💡 수정된 부분: 베이지색(#e5dfd5)에서 첨부 이미지 속 핑크색 계열(#fad4da)로 배경색을 변경했습니다. */
             background-color: #fad4da; 
             padding: 0; 
         }
@@ -77,7 +74,8 @@
         
         /* 갤러리 섹션 */
         .sec-gallery { 
-            background-color: #000; 
+            /* 💡 수정된 부분: 검정색(#000)에서 핑크색 계열(#fad4da)로 변경하여 사진 사이 여백이 핑크색으로 보입니다. */
+            background-color: #fad4da; 
             padding: 0 !important; 
         }
         .grid { 
@@ -523,7 +521,7 @@
                 content: {
                     title: '정범영 🤍 방소현 결혼합니다',
                     description: '2026년 10월 9일 오후 5시, 저희의 소중한 날에 초대합니다.',
-                    imageUrl: 'https://bumyoungsohyeon-wedding.vercel.app/images/link_main.webp',
+                    imageUrl: 'https://bumyoungsohyeon-wedding.wedding.app/images/link_main.webp',
                     link: {
                         mobileWebUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
                         webUrl: 'https://bumyoungsohyeon-wedding.vercel.app',
