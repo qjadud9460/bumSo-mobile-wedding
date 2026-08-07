@@ -48,30 +48,41 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 섹션 (영상 최적화 수정) */
+        /* 메인 섹션 (영상 비율 잘림 방지 및 배경 블러 처리) */
         .sec-main { 
-            /* 비디오가 꽉 차지 않는 부분을 메인 배경색(#fad4da)으로 채웁니다 */
-            background-color: #fad4da; 
+            background-color: #1a1a1a; 
             padding: 0; 
             margin-bottom: 0;
             position: relative; 
             width: 100%;
-            /* 원하는 영상의 높이를 지정합니다. (예: 550px) */
             height: 550px; 
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+        }
+
+        /* 배경에 깔리는 은은한 블러 효과 레이어 (영상의 빈 공간을 채워줌) */
+        .sec-main::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/main_video.mp4'); /* 비디오 프레임 백그라운드 보조 */
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: 1;
         }
 
         .sec-main video {
             width: 100%; 
             height: 100%; 
-            /* [수정] cover -> contain: 영상이 잘리지 않고 원본 비율대로 다 보여집니다 */
+            /* contain으로 설정하여 영상 내용이 절대 잘리지 않고 전체가 다 보이게 조정 */
             object-fit: contain; 
             display: block; 
-            /* 아이폰 자동재생 방지용 */
-            background-color: #fad4da;
+            position: relative;
+            z-index: 2;
         }
 
         /* 초대글 섹션 */
@@ -198,85 +209,5 @@
         details { background-color: #2a2a2a; border-radius: 8px; margin-bottom: 1rem; text-align: left; overflow: hidden; }
         summary { padding: 1rem; color: white; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
         summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transform: rotate(45deg); /* 변경됨 */ }
-        details[open] summary::after { transform: rotate(0deg); /* 변경됨 */ }
-        .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.95rem; border-top: 1px solid #ddd; }
-        .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-        .account-row:last-child { margin-bottom: 0; }
-        .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
-
-        /* 하단 바 */
-        .bottom-bar { 
-            background: linear-gradient(to top, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0)); 
-            padding: 1rem; 
-            display: flex; 
-            gap: 0.5rem; 
-            position: fixed; 
-            bottom: 0; 
-            left: 50%; 
-            transform: translateX(-50%);
-            width: 100%; 
-            max-width: 430px; 
-            z-index: 1000; 
-        }
-        .btn { flex: 1; padding: 0.9rem; border-radius: 12px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .btn-link { background-color: #e5e7eb; color: #333; }
-        .btn-kakao { background-color: #fae100; color: #3c1e1e; }
-
-        /* BGM 버튼 */
-        .bgm-btn {
-            position: absolute; 
-            top: 20px; 
-            left: 20px;
-            background-color: rgba(28, 28, 28, 0.75); 
-            color: #fad4da;
-            border: 1px solid #fad4da; 
-            border-radius: 50px; 
-            padding: 6px 14px;
-            font-size: 0.8rem; 
-            cursor: pointer; 
-            z-index: 999;
-            display: flex; 
-            align-items: center; 
-            gap: 5px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        
-        <audio id="bgm" src="images/bgm.mp3" loop preload="auto"></audio>
-
-        <section class="sec-main">
-            <button class="bgm-btn" id="bgmToggleBtn" onclick="toggleBGM()">
-                🎵 BGM <span>OFF</span>
-            </button>
-
-            <video src="images/main_video.mp4" autoplay muted loop playsinline></video>
-        </section>
-
-        <section class="sec-invite fade-up">
-            <img src="images/sub_section.webp" alt="초대글 및 서브 사진" loading="lazy">
-        </section>
-
-        <section class="sec-gallery fade-up">
-            <div class="grid">
-                <img src="images/gallery-1.webp" alt="갤러리 1" loading="lazy" onclick="openLightbox(0)">
-                <img src="images/gallery-2.webp" alt="갤러리 2" loading="lazy" onclick="openLightbox(1)">
-                <img src="images/gallery-3.webp" alt="갤러리 3" loading="lazy" onclick="openLightbox(2)">
-                <img src="images/gallery-4.webp" alt="갤러리 4" loading="lazy" onclick="openLightbox(3)">
-                <img src="images/gallery-5.webp" alt="갤러리 5" loading="lazy" onclick="openLightbox(4)">
-                <img src="images/gallery-6.webp" alt="갤러리 6" loading="lazy" onclick="openLightbox(5)">
-                <img src="images/gallery-7.webp" alt="갤러리 7" loading="lazy" onclick="openLightbox(6)">
-                <img src="images/gallery-8.webp" alt="갤러리 8" loading="lazy" onclick="openLightbox(7)">
-                <img src="images/gallery-9.webp" alt="갤러리 9" loading="lazy" onclick="openLightbox(8)">
-                <img src="images/gallery-10.webp" alt="갤러리 10" loading="lazy" onclick="openLightbox(9)">
-                <img src="images/gallery-11.webp" alt="갤러리 11" loading="lazy" onclick="openLightbox(10)">
-                <img src="images/gallery-12.webp" alt="갤러리 12" loading="lazy" onclick="openLightbox(11)">
-                <img src="images/gallery-13.webp" alt="갤러리 13" loading="lazy" onclick="openLightbox(12)">
-                <img src="images/gallery-14.webp" alt="갤러리 14" loading="lazy" onclick="openLightbox(13)">
-                <img src="images/gallery-15.webp" alt="갤러리 15" loading="lazy" onclick="openLightbox(14)">
-                <img src="images/gallery-16.webp" alt="갤러리 16" loading="lazy" onclick="openLightbox(15)">
-                <img src="images/gallery-17.webp" alt="갤러리 17" loading="lazy" onclick="openLightbox(16)">
-                <img src="images/gallery-1
+        summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(
