@@ -48,16 +48,25 @@
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* 메인 섹션 (영상 적용) */
+        /* 💡 메인 섹션 수정 (화면 사라짐 및 하단 잘림 동시 방지) */
         .sec-main { 
             background-color: #fad4da; 
             padding: 0; 
             margin-bottom: 0;
             position: relative; 
+            width: 100%;
+            min-height: 550px; /* 영상 로딩 실패/지연 시 화면이 날아가는 것 방지 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
         .sec-main video {
             width: 100%; 
-            height: auto; /* 기존 550px 고정을 auto로 변경하여 영상 잘림 완벽 방지 */
+            height: auto;
+            min-height: 550px; 
+            max-height: 85vh; /* 화면 밖으로 너무 길게 나가지 않도록 제한 */
+            object-fit: contain; /* 원본 비율 유지, 하단 잘림 절대 없음 */
             display: block; 
         }
 
@@ -182,4 +191,28 @@
         /* 계좌번호 */
         .sec-account { background-color: #1c1c1c; border-top: 1px dashed #444; padding-bottom: 4rem; }
         .sec-account h2 { color: #fad4da; font-size: 1.2rem; margin-bottom: 2rem; font-weight: normal; }
-        details {
+        details { background-color: #2a2a2a; border-radius: 8px; margin-bottom: 1rem; text-align: left; overflow: hidden; }
+        summary { padding: 1rem; color: white; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.2rem; color: #fad4da; transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(45deg); }
+        .account-body { padding: 1rem; background-color: white; color: #333; font-size: 0.95rem; border-top: 1px solid #ddd; }
+        .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .account-row:last-child { margin-bottom: 0; }
+        .copy-btn { background-color: #e5e7eb; border: none; padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; }
+
+        /* 하단 바 */
+        .bottom-bar { 
+            background: linear-gradient(to top, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0)); 
+            padding: 1rem; 
+            display: flex; 
+            gap: 0.5rem; 
+            position: fixed; 
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 100%; 
+            max-width: 430px; 
+            z-index: 1000; 
+        }
+        .btn { flex: 1; padding: 0.9rem; border-radius: 12px; font-size: 1rem; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0
